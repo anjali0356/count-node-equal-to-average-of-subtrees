@@ -1,0 +1,18 @@
+count node equal to average of subtree
+
+class Solution {
+    public int averageOfSubtree(TreeNode root){
+int ans[] = new int[1];
+        solve(root, ans);
+        return ans[0];
+    }
+    int[] solve(TreeNode root, int []ans) {
+        if(root == null) return new int[]{0, 0};
+        int[] left = solve(root.left, ans); 
+        int[] right = solve(root.right, ans); 
+        int total = 1 + left[1] + right[1];
+        int avg = (root.val + left[0] + right[0]) / total;
+        if(avg == root.val) ans[0]++;
+        return new int[] {root.val + left[0] + right[0], total};
+   }
+}
